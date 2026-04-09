@@ -53,6 +53,7 @@ cd src/CAMRE
 
 # Terminal 2 - Launch trajectory planner
 source devel/setup.bash
+cd src/CAMRE
 ./planner.sh
 ```
 
