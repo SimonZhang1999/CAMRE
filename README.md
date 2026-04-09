@@ -62,4 +62,4 @@ cd src/CAMRE
 A simulation and real-world experiments video demonstrating our proposed framework can be found at [bilibili](https://www.bilibili.com/video/BV1W2wUzAEod/?spm_id_from=333.1387.list.card_archive.click).
 
 ### Acknowledgement
-We build upon [**DDR-opt**](https://github.com/ZJU-FAST-Lab/DDR-opt) to achieve efficient distributed trajectory optimization. We use [**active_graph_slam**](https://github.com/JulioPlaced/active_graph_slam) for frontier detection.
+We build upon [**DDR-opt**](https://github.com/ZJU-FAST-Lab/DDR-opt) to achieve efficient distributed trajectory optimization. We use [**active_graph_slam**](https://github.com/JulioPlaced/active_graph_slam) for frontier detection, and [**LoS_constrained_navigation**](https://github.com/bairuofei/LoS_constrained_navigation) to generate visible regions.
