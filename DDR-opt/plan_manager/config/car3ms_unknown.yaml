@@ -1,0 +1,23 @@
+# Physical parameters
+# Maximum speed (straight driving)
+max_vel:                        0.75
+min_vel:                        -0.75
+# Maximum acceleration
+max_acc:                        0.3
+# Maximum angular velocity (in-place rotation)
+max_omega:                      1.745329
+# Maximum angular acceleration
+max_domega:                     1.745329
+# If directly constrain velocity and angular velocity
+# False: contrain v*omega
+# True: contrain v and omega
+if_directly_constrain_v_omega:  True
+# To prevent the vehicle from overturning or skidding, the maximum lateral acceleration is limited (all examples are on flat ground), taking the minimum value if both are considered
+# To prevent overturning, the maximum centripetal acceleration is gB/2h, where g is the gravitational acceleration, B is the wheelbase, and h is the center of gravity height
+# To prevent skidding, the maximum centripetal acceleration is μg, where μ is the friction coefficient and g is the gravitational acceleration
+# The current parameter is given randomly to verify its effectiveness
+max_centripetal_acc:            50
+
+# Collision checkpoint
+# Single point
+checkpoint:   [0.0, 0.0]

@@ -1,0 +1,20 @@
+<launch>
+  <arg name="robot1_name"  default="robot_1"/>
+  <group ns="$(arg robot1_name)">
+    <node pkg="cure_planner" type="scan_star_region_node" name="scan_star_region" output="screen">
+      <param name="namespace" value="$(arg robot1_name)"/>
+      <param name="scan_topic" value="/$(arg robot1_name)/filter_scan"/>
+      <param name="base_frame" value="/$(arg robot1_name)/base_link"/>
+      <param name="cluster_enable" value="true"/>
+      <param name="Rlocal" value="10.0"/>
+      <param name="voxel_leaf" value="0.05"/>
+      <param name="use_tf_center" value="false"/>
+    </node>
+    <!-- <node pkg="cure_planner" type="pub_flipped_convexhull" name="pub_flipped_convexhull" output="screen">
+        <param name="namespace" value="$(arg robot1_name)"/>
+        <param name="color_r" value="0.757" />
+        <param name="color_g" value="0.02" />
+        <param name="color_b" value="0.969" />
+    </node> -->
+  </group>
+</launch>

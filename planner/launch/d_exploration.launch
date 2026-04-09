@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot1_name"  default="robot_1"/>
+  <arg name="robot2_name"  default="robot_2"/>
+  <arg name="robot3_name"  default="robot_3"/>
+  <arg name="robot4_name"  default="robot_4"/>
+  <!-- 全局参数 -->
+  
+  <rosparam command="load" file="$(find cure_planner)/launch/param/clutter_env.yaml"/>
+  <!-- <rosparam command="load" file="$(find connectivity_exploration)/param/forest.yaml"/> -->
+
+  <arg name="lambda_prefer" default="0.001"/>
+  <arg name="flip_radius" default="150"/>
+  <arg name="use_dk" default="false"/>
+  <arg name="enable_mst" default="true"/>
+  <arg name="enable_record" default="false"/>
+  <arg name="exp_suffix" default=""/>
+
+
+  <param name="lambda_prefer" value="$(arg lambda_prefer)"/>
+  <param name="flip_radius" value="$(arg flip_radius)"/>
+  <param name="use_dk" value="$(arg use_dk)"/>
+  <param name="enable_mst" value="$(arg enable_mst)"/>
+  <param name="enable_record" value="$(arg enable_record)"/>
+  <param name="exp_suffix" value="$(arg exp_suffix)"/>
+  
+  <param name="control_rate" value="30"/>
+  <param name="step" value="0.05"/>
+
+  <param name="basic_scaling_factor" value="0.8"/>     
+  <!-- 0.8 -->
+  <param name="leader_scaling_factor" value="1.2"/>
+  <param name="leader_crucial_connectivity_force" value="4.5"/>
+  <param name="leader_crucial_scaling_factor" value="0.99"/>
+  <param name="all_crucial_connectivity_force" value="8"/>
+  <param name="all_crucial_scaling_factor" value="0.0"/>
+
+  <param name="d_los_min" value="0.1"/>     
+  <!-- parameter when using dk 3.0 -->
+  <param name="d_los_max" value="1.2"/>    
+  <!-- <arg name="map_filename" value="$(find cure_planner)/maps/map.yaml" /> -->
+
+  <group ns="$(arg robot1_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/multi_slam_realm/launch/multi_connect_karto.launch"></include> 
+  </group>
+
+  <group ns="$(arg robot2_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/multi_slam_realm/launch/multi_connect_karto.launch"></include> 
+  </group>
+
+  <group ns="$(arg robot3_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/multi_slam_realm/launch/multi_connect_karto.launch"></include> 
+  </group>
+
+  <group ns="$(arg robot4_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/multi_slam_realm/launch/multi_connect_karto.launch"></include> 
+  </group>
+  <include file="/home/weijian/CURE1/src/CURE1/cure_planner/launch/graph_mst.launch"></include> 
+
+  <!-- <include file="/home/weijian/CURE1/src/CURE1/cure_planner/launch/frontier_assigner.launch"></include>  -->
+
+</launch>

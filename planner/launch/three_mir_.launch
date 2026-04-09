@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot1_name"  default="robot_1"/>
+  <arg name="robot2_name"  default="robot_2"/>
+  <arg name="robot3_name"  default="robot_3"/>
+  <arg name="robot4_name"  default="robot_4"/>
+  <arg name="robot5_name"  default="robot_5"/>
+  <arg name="num_robots"  default="4"/>
+  
+  <rosparam command="load" file="$(find cure_planner)/launch/param/clutter_env.yaml"/>
+  <!-- <rosparam command="load" file="$(find connectivity_exploration)/param/forest.yaml"/> -->
+
+  <arg name="lambda_prefer" default="0.001"/>
+  <arg name="flip_radius" default="150"/>
+  <arg name="use_dk" default="false"/>
+  <arg name="enable_mst" default="true"/>
+  <arg name="enable_record" default="false"/>
+  <arg name="exp_suffix" default=""/>
+
+  <param name="lambda_prefer" value="$(arg lambda_prefer)"/>
+  <param name="flip_radius" value="$(arg flip_radius)"/>
+  <param name="use_dk" value="$(arg use_dk)"/>
+  <param name="enable_mst" value="$(arg enable_mst)"/>
+  <param name="enable_record" value="$(arg enable_record)"/>
+  <param name="exp_suffix" value="$(arg exp_suffix)"/>
+  
+  <param name="control_rate" value="30"/>
+  <param name="step" value="0.05"/>
+
+  <param name="basic_scaling_factor" value="0.8"/>     
+  <!-- 0.8 -->
+  <param name="leader_scaling_factor" value="1.2"/>
+  <param name="leader_crucial_connectivity_force" value="4.5"/>
+  <param name="leader_crucial_scaling_factor" value="0.99"/>
+  <param name="all_crucial_connectivity_force" value="8"/>
+  <param name="all_crucial_scaling_factor" value="0.0"/>
+
+  <param name="d_los_min" value="0.1"/>     
+  <!-- parameter when using dk 3.0 -->
+  <param name="d_los_max" value="1.2"/>    
+  <!-- <arg name="map_filename" value="$(find cure_planner)/maps/map.yaml" /> -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <!-- <arg name="world_name" value="$(find cure_planner)/worlds/map4.world"/> -->
+    <!-- <arg name="world_name" value="$(find cure_planner)/worlds/larger_garage.world"/> -->
+    <arg name="world_name" value="$(find cure_planner)/worlds/mazetest_scaled.world"/>
+    <!-- <arg name="world_name" value="$(find cure_planner)/worlds/office.world"/> -->
+
+  </include>
+
+  <group ns="$(arg robot1_name)">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="$(arg robot1_name)"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_1" pkg="gazebo_ros" type="spawn_model" args="
+        -x 0.0
+        -y 0.0
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model $(arg robot1_name)" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control1.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="$(arg robot1_name)"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="$(arg robot1_name)"/>
+    </include> 
+
+    <node pkg="cure_planner" type="scan_filter" name="scan_filter">
+        <param name="namespace" value="$(arg robot1_name)"/>
+        <param name="robot_number" value="$(arg num_robots)"/>
+    </node>
+    <node pkg="cure_planner" type="pub_flipped_convexhull" name="pub_flipped_convexhull" output="screen">
+        <param name="namespace" value="$(arg robot1_name)"/>
+        <param name="color_r" value="0.757" />
+        <param name="color_g" value="0.02" />
+        <param name="color_b" value="0.969" />
+    </node>
+  </group>
+
+  <group ns="$(arg robot2_name)">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="$(arg robot2_name)"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_2" pkg="gazebo_ros" type="spawn_model" args="
+        -x -2.0
+        -y -0.0
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model $(arg robot2_name)" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control2.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="$(arg robot2_name)"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="$(arg robot2_name)"/>
+    </include> 
+
+    <node pkg="cure_planner" type="scan_filter" name="scan_filter">
+        <param name="namespace" value="$(arg robot2_name)"/>
+        <param name="robot_number" value="$(arg num_robots)"/>
+    </node>
+    <node pkg="cure_planner" type="pub_flipped_convexhull" name="pub_flipped_convexhull" output="screen">
+        <param name="namespace" value="$(arg robot2_name)"/>
+        <param name="color_r" value="0.757" />
+        <param name="color_g" value="0.02" />
+        <param name="color_b" value="0.969" />
+    </node>
+  </group>
+
+  <group ns="$(arg robot3_name)">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="$(arg robot3_name)"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_3" pkg="gazebo_ros" type="spawn_model" args="
+        -x 0.0
+        -y 2.5
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model $(arg robot3_name)" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control3.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="$(arg robot3_name)"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="$(arg robot3_name)"/>
+    </include> 
+
+    <node pkg="cure_planner" type="scan_filter" name="scan_filter">
+        <param name="namespace" value="$(arg robot3_name)"/>
+        <param name="robot_number" value="$(arg num_robots)"/>
+    </node>
+    <node pkg="cure_planner" type="pub_flipped_convexhull" name="pub_flipped_convexhull" output="screen">
+        <param name="namespace" value="$(arg robot3_name)"/>
+        <param name="color_r" value="0.757" />
+        <param name="color_g" value="0.02" />
+        <param name="color_b" value="0.969" />
+    </node>
+  </group>
+
+  <group ns="$(arg robot4_name)">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="$(arg robot4_name)"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_4" pkg="gazebo_ros" type="spawn_model" args="
+        -x -4
+        -y -2
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model $(arg robot4_name)" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control4.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="$(arg robot4_name)"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="$(arg robot4_name)"/>
+    </include> 
+
+    <node pkg="cure_planner" type="scan_filter" name="scan_filter">
+        <param name="namespace" value="$(arg robot4_name)"/>
+        <param name="robot_number" value="$(arg num_robots)"/>
+    </node>
+    <node pkg="cure_planner" type="pub_flipped_convexhull" name="pub_flipped_convexhull" output="screen">
+        <param name="namespace" value="$(arg robot4_name)"/>
+        <param name="color_r" value="0.757" />
+        <param name="color_g" value="0.02" />
+        <param name="color_b" value="0.969" />
+    </node>
+  </group>
+
+  <node pkg="cure_planner" type="merge_map" name="merge_map" output="screen">
+    <param name="n_robot" value = "$(arg num_robots)" />
+    <param name="robot_id" value = "2" />
+    <param name="map_x" value = "-20.0" />
+    <param name="map_y" value = "-20.0" />
+    <param name="map_width" value = "400" />
+    <param name="map_height" value = "400" />
+  </node>
+  <node pkg="tf" type="static_transform_publisher" name="robot3_to_robot1" args="0 2.5 0 0 0 0 /robot_1/map /robot_3/map 20" />
+  <node pkg="tf" type="static_transform_publisher" name="robot2_to_robot1" args="-2 0.0 0 0 0 0 /robot_1/map /robot_2/map 20" />
+  <node pkg="tf" type="static_transform_publisher" name="robot4_to_robot1" args="-4 -2 0 0 0 0 /robot_1/map /robot_4/map 20" />
+  <node pkg="tf" type="static_transform_publisher" name="map_to_r1map" args="0.0 0.0 0.0 0.0 0.0 0.0 /map /robot_1/map 100" />
+  
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find cure_planner)/launch/three_robot.rviz">
+    <!-- <remap from="move_base_simple/goal" to="robot_1/move_base_simple/goal"/> -->
+  </node>
+  
+  <!-- <node pkg="cure_planner" type="robot_position" name="robot_position" output="screen">
+	  <param name="n_robot" value = "$(arg num_robots)" />
+  </node> -->
+</launch>

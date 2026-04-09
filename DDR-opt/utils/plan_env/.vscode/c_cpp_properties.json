@@ -1,0 +1,47 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/weijian/CURE1/devel/include/**",
+        "/home/weijian/DDRopt_ws/devel/include/**",
+        "/home/weijian/CPDOT_REAL/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/back_end/include/**",
+        "/home/weijian/CURE1/src/CURE1/cure_planner/include/**",
+        "/home/weijian/CPDOT_REAL/src/DecompROS/decomp_ros_utils/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/mir/mir_submodules/ewellix_tlt/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/front_end/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/submodules/gazebo_ros_link_attacher/include/**",
+        "/home/weijian/CPDOT_REAL/src/gazebo_sfm_plugin/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/icrekf/include/**",
+        "/home/weijian/CPDOT_REAL/src/liom_local_planner/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/submodules/match_path_planning/local_plan_follower/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/match_gazebo/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/mpc_controller/include/**",
+        "/home/weijian/CURE1/src/CURE1/multi_slam_realm/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/nmpc_controller/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/utils/plan_env/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/plan_manager/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/robotiq/robotiq_gazebo/include/**",
+        "/home/weijian/CURE1/src/CURE1/DDR-opt/utils/simulator/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/submodules/match_path_planning/splined_voronoi/splined_voronoi/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/ur_calibrated_pose_pub/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/ur_ros_driver/ur_calibration/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/ur_controllers_extended/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/universal_robot/ur_kinematics/include/**",
+        "/home/weijian/CURE1/src/CURE1/match_mobile_robotics/ur/ur_ros_driver/ur_robot_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

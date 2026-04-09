@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name"  default="robot"/>
+  <!-- <arg name="robot1_name"  default="robot_1"/>
+  <arg name="robot2_name"  default="robot_2"/>
+  <arg name="robot3_name"  default="robot_3"/>
+  <arg name="robot4_name"  default="robot_4"/>
+  <arg name="robot5_name"  default="robot_5"/> -->
+  <group ns="$(arg robot_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/DDR-opt/plan_manager/launch/planner_sim_unknown.launch"></include> 
+  </group>
+
+  <!-- <group ns="$(arg robot2_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/DDR-opt/plan_manager/launch/planner_sim_unknown.launch"></include> 
+  </group>
+
+  <group ns="$(arg robot3_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/DDR-opt/plan_manager/launch/planner_sim_unknown.launch"></include> 
+  </group> -->
+
+  <!-- <group ns="$(arg robot4_name)">
+    <include file="/home/weijian/CURE1/src/CURE1/DDR-opt/plan_manager/launch/planner_sim_unknown.launch"></include> 
+  </group> -->
+
+</launch>

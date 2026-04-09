@@ -1,0 +1,44 @@
+<!--
+Launch file for running the multirobot simulation on gazebo
+-->
+
+<!-- Launches Kobuki Gazebo simulation in an empty world -->
+<launch>
+    <arg name="num_robots" default="4"/>
+    <param name="num_robots" value="$(arg num_robots)"/>
+    <!-- <node pkg="multi_slam_realm" type="multi_slam_karto" name="multi_slam_karto" output="screen">
+        <param name="map_update_interval" value="1"/>    	
+        <param name="throttle_scans" value="1"/>
+        <param name="resolution" value="0.05"/>
+        <param name="delta" value="0.05"/>
+        <param name="transform_publish_period" value="0.01"/>
+        <param name="transform_tolerance" value="1.0" />
+    </node> -->
+
+
+    <!-- Newly added for frontier detection -->
+    <node pkg="multi_slam_realm" type="opencv_detector.py" name="opencv_detector" output="screen">
+        <param name="map_topic" value="map"/>
+        <param name="rate" value="10.0" />
+    </node>
+
+    <node pkg="multi_slam_realm" type="filter.py" name="filter" output="screen" respawn="true" respawn_delay="3">
+        <!-- <param name="map_topic" value="map"/> -->
+        <param name="costmap_clearing_threshold" value="70"/>
+        <!-- <param name="goals_topic" value="detected_points"/> -->
+        <param name="namespace" value="/robot_"/>
+        <param name="rate" value="10.0"/>
+        <param name="info_radius" value="1"/>
+        <!-- cost map using robot 1's cost map 不合理 -->
+        <!-- <param name="robot_frame" value="base_link"/> -->
+    </node>
+    
+    <node pkg="multi_slam_realm" type="initializer.py" name="point_init" output="screen">
+        <param name="rate" value="1"/>
+    </node>
+
+    <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find multi_slam_karto)/rviz/single.rviz">
+        <remap from="move_base_simple/goal" to="robot_1/move_base_simple/goal"/>
+    </node> -->
+
+</launch>
