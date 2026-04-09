@@ -11,7 +11,7 @@ University of Birmingham
 
 ## Overview
 <p align="center">
-  <img src="https://github.com/HyPAIR/CAMRE/blob/main/misc/case2026.gif" alt="CAMRE" width="600">
+  <img src="https://github.com/HyPAIR/CAMRE/blob/main/misc/case2026.gif" alt="CAMRE" width="700">
 </p>
 
 ## Features
