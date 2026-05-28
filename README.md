@@ -1,5 +1,5 @@
 <div align ="center">
-<h3> Submitted to CASE 2026: Multi-Nonholonomic Robot Exploration with Line-of-Sight Maintenance in Unknown Environments </h3>
+<h3> CASE 2026: Multi-Nonholonomic Robot Exploration with Line-of-Sight Maintenance in Unknown Environments </h3>
 
 Weijian Zhang, Charlie Street, Masoumeh Mansouri
 
