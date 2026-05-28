@@ -5,7 +5,7 @@ Weijian Zhang, Charlie Street, Masoumeh Mansouri
 
 University of Birmingham
 
-<a href="https://ieeexplore.ieee.org/"><img alt="Paper" src="https://img.shields.io/badge/Paper-Preprint-pink"/></a>
+<a href="https://research.birmingham.ac.uk/en/publications/multi-nonholonomic-robot-exploration-with-line-of-sight-maintenan/"><img alt="Paper" src="https://img.shields.io/badge/Paper-Preprint-pink"/></a>
 <a href="https://www.bilibili.com/video/BV1W2wUzAEod/?spm_id_from=333.1387.list.card_archive.click"><img alt="Video" src="https://img.shields.io/badge/Video-bilibili-blue"/></a>
 </div>
 
